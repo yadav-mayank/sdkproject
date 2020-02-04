@@ -283,6 +283,18 @@ proceedToPayWeb = () =>  {
 refresh = () => {
     window.location.reload(true)
 }
+
+createServiceRequestToken = () => {
+  sdk.createServiceRequestToken().then(res => {
+    alert(JSON.stringify(res))
+  }).catch(err => alert(err))
+}
+
+fetchAuthToken = () => {
+  sdk.fetchAuthToken().then(res => {
+    alert(JSON.stringify(res))
+  }).catch(err => alert(err))
+}
   
   render() {
     return (
@@ -362,6 +374,13 @@ refresh = () => {
               <button onClick=  {() => this.refresh()} style={{padding: 16, borderRadius: 8, backgroundColor :'rgba(103,64,180)'}}>
                 <p style={{color: 'white'}}>refresh</p>
               </button>
+              <button onClick=  {() => this.createServiceRequestToken()} style={{padding: 16, borderRadius: 8, backgroundColor :'rgba(103,64,180)'}}>
+                <p style={{color: 'white'}}>createServiceRequestToken</p>
+              </button>
+              <button onClick=  {() => this.fetchAuthToken()} style={{padding: 16, borderRadius: 8, backgroundColor :'rgba(103,64,180)'}}>
+                <p style={{color: 'white'}}>fetchAuthToken</p>
+              </button>
+
         </header>
       </div>
     )
