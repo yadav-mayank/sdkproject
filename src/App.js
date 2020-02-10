@@ -3,8 +3,7 @@ import './App.css';
 import {PhonePe} from 'phonepesdk-web'
 
 let sdk
-
-PhonePe.PhonePe.build("web").then((ppSDK) => sdk = ppSDK).catch(err => console.log(err))
+PhonePe.PhonePe.build(PhonePe.Constants.Species.web).then((ppSDK) => sdk = ppSDK).catch(err => console.log(err))
 
 class App extends React.Component {
 
@@ -21,7 +20,7 @@ createuuid = () => {
 }
 
 transactionId = () => {
-    return this.createuuid()
+    return "A1912271254229952543599"
 }
 
 reservervationId = () => {
@@ -132,7 +131,9 @@ navigateToPayments = () => {
      * **/
         // let actionButtonProp = new PhonePe.PaymentModels.ActionButtonProp('Done')
         // let confirmationState = { [PhonePe.PaymentModels.TransactionState.COMPLETED] : actionButtonProp }
-        sdk.openPaymentsPage(merchantName, context, "", "").then((response) => {
+        let actionButtonProp = new PhonePe.PaymentModels.ActionButtonProp('Done')
+        let confirmationState = { [PhonePe.PaymentModels.TransactionState.COMPLETED] : actionButtonProp }
+        sdk.openPaymentsPage(merchantName, context, "", "", metadata, confirmationState).then((response) => {
             console.log("Payment was successful = " + response)
         }).catch((err) => {
             console.log("Payment failed with error = " + err)
@@ -148,6 +149,7 @@ seekPermission = () => {
 
     sdk.seekPermission(['READ_SMS', 'LOCATION']).then((data) => {
         console.log('Successfully got permission for readsms')
+        alert(JSON.stringify(data))
     })
 }
 
